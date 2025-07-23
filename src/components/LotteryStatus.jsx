@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { VeChainContext } from '../context/VeChainContext';
 import { getLotteryStatus } from '../services/lotteryService';
-import lotteryABI from '../components/lotteryABI';
+import lotteryABI from '../abis/lotteryABI';
 
 const LotteryStatus = ({ lotteryAddress, statusTrigger, decimals }) => {
   const { thorClient } = useContext(VeChainContext);

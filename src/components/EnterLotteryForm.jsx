@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { VeChainContext } from '../context/VeChainContext';
 import { approveToken, enterLottery, getWinProbability, getTokenAllowance } from '../services/lotteryService';
-import lotteryABI from '../components/lotteryABI';
+import lotteryABI from '../abis/lotteryABI';
 
 const EnterLotteryForm = ({ lotteryAddress, tokenAddress, onEnterSuccess }) => {
   const { thorClient, provider, walletInfo } = useContext(VeChainContext);

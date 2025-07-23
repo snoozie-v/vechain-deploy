@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { VeChainContext } from "../context/VeChainContext";
 import {getTokenBalance} from "../services/tokenService";
-import shtABI from "../components/shtABI";
+import shtABI from "../abis/shtABI";
 import { getRevertReason } from "../services/lotteryService";
 
 

@@ -1,16 +1,23 @@
 import { useContext, useState } from "react";
 import { VeChainContext } from "../context/VeChainContext";
 import {deployLottery} from "../services/lotteryService"
-import lotteryABI from "../components/lotteryABI"; // Import lottery ABI
-import lotteryBytecode from "../components/lotteryBytecode"; // Import lottery bytecode
+import lotteryABI from "../abis/lotteryABI"; // Import lottery ABI
+import lotteryBytecode from "../abis/lotteryBytecode"; // Import lottery bytecode
 import {deployToken,transferToken,getTokenBalance } from "../services/tokenService";
-import shtByte from "../components/shtByte";
-import shtABI from "../components/shtABI";
+import shtByte from "../abis/shtByte";
+import shtABI from "../abis/shtABI";
+import flipABI from "../abis/flipABI";
+import flipBytecode from "../abis/flipBytecode";
+import { deployFlipCoin } from "../services/flipService";
+import hangManABI from "../abis/hangManABI";
+import hangManBytecode from "../abis/hangManBytecode";
 
 const Deployment = ({tokenAddress}) => {
   const { thorClient, walletInfo, provider } = useContext(VeChainContext);
   const [output, setOutput] = useState("Contract Address will appear here");
 
+
+      
 
   const deploySHT = async () => {
     try {
@@ -44,6 +51,50 @@ const Deployment = ({tokenAddress}) => {
     }
   };
 
+const deployHangMan = async () => {
+  console.log('thorClient:', thorClient);
+  if (!thorClient || !provider || !walletInfo) {
+    setOutput("Missing required context for deployment");
+    return;
+  }
+  try {
+    const address = await deployFlipCoin(
+      thorClient,
+      provider,
+      walletInfo,
+      hangManABI,
+      hangManBytecode
+    );
+    console.log('Deployed FlipCoin at:', address);
+    setOutput(`Flip deployed at: ${address}`);
+  } catch (err) {
+    console.error('Full error:', err);
+    setOutput(`Error deploying Flip: ${err.message}`);
+  }
+};
+
+ const deployFlip = async () => {
+  console.log('thorClient:', thorClient);
+  if (!thorClient || !provider || !walletInfo) {
+    setOutput("Missing required context for deployment");
+    return;
+  }
+  try {
+    const address = await deployFlipCoin(
+      thorClient,
+      provider,
+      walletInfo,
+      flipABI,
+      flipBytecode
+    );
+    console.log('Deployed FlipCoin at:', address);
+    setOutput(`Flip deployed at: ${address}`);
+  } catch (err) {
+    console.error('Full error:', err);
+    setOutput(`Error deploying Flip: ${err.message}`);
+  }
+};
+
   const deployLotteryContract = async () => {
     console.log('thorclient', thorClient)
     if (!thorClient || !provider || !walletInfo) {
@@ -64,7 +115,6 @@ const Deployment = ({tokenAddress}) => {
         lotteryBytecode
       );
       console.log(address);
-      // setLotteryAddress(address); // Store lottery address
       setOutput(`Lottery deployed at: ${address}`);
     } catch (err) {
       setOutput(`Error deploying Lottery: ${err.message}`);
@@ -84,6 +134,13 @@ return (
       >
         Deploy Lottery
       </button>
+      <button onClick={deployFlip} disabled={!thorClient || !walletInfo?.privateKey}>
+        Deploy Flip
+        </button>
+      <button onClick={deployHangMan} disabled={!thorClient || !walletInfo?.privateKey}>
+        Deploy HangMan
+        </button>
+  
     {output && <p>{output}</p>}
     </div>
 )

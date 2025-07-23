@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { VeChainContext } from '../context/VeChainContext';
 import { pastWinner, initializeLottery, pickWinner } from '../services/lotteryService';
-import lotteryABI from '../components/lotteryABI';
+import lotteryABI from '../abis/lotteryABI';
 
 const AdminControls = ({ lotteryAddress }) => {
   const { thorClient, provider, walletInfo } = useContext(VeChainContext);
