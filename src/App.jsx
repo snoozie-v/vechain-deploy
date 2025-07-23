@@ -28,10 +28,10 @@ function App() {
 
   return (
     <div className="lottery-form-container">
-      <h1>Testnet Games</h1>
+      {/* <h1>Testnet Games</h1> */}
 
       <div>
-        {tokenAddress && (
+        {/* {tokenAddress && (
           <p>
             <strong>Token Contract Address:</strong> {tokenAddress}
           </p>
@@ -40,7 +40,7 @@ function App() {
           <p>
             <strong>HangMan Contract Address:</strong> {hangManAddress}
           </p>
-        )}
+        )} */}
         {/* {lotteryAddress && (
           <p>
             <strong>Lottery Contract Address:</strong> {lotteryAddress}
